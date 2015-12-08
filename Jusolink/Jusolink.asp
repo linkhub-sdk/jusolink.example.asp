@@ -192,6 +192,7 @@ Class JusoInfo
 	End Sub
 	
 	Public Sub fromJsonInfo(jsonInfo)
+			On Error Resume Next
 			roadAddr1 = jsonInfo.roadAddr1
 			roadADdr2 = jsonInfo.roadAddr2
 			jibunAddr = jsonInfo.jibunAddr
@@ -213,7 +214,7 @@ Class JusoInfo
 					detailBuildingName(i) = jsonInfo.detailBuildingName.Get(i)
 				Next
 			End If
-	
+			On Error GoTo 0
 	End Sub
 End Class
 
