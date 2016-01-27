@@ -23,8 +23,20 @@ Public Sub Class_Initialize
 	Set m_sha1 = GetObject( "script:" & Request.ServerVariables("APPL_PHYSICAL_PATH") + "Jusolink\Linkhub" & "\sha1.wsc" )
 End Sub
 
-Public Function UTCTime
-	UTCTime = DateAdd("h",m_sha1.getTimeZoneOffSet(),now)
+Public function getTime
+	Set winhttp1 = CreateObject("Msxml2.ServerXMLHTTP.6.0")
+    Call winhttp1.Open("GET", linkhub_ServiceURL + "/Time")
+    
+    winhttp1.send
+    result = winhttp1.responseText
+       
+    If winhttp1.Status <> 200 Then
+		Set er = parse(result)
+		Err.raise er.code , "LINKHUB", er.message
+    End If
+    Set winhttp1 = Nothing
+       
+    getTime = result
 End Function
 
 

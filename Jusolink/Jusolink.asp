@@ -57,7 +57,7 @@ Public Function getSession_token()
 		Next
 		If refresh = False then
 			Dim utcnow
-			utcnow = m_Linkhub.UTCTime
+			utcnow = CDate(Replace(left(m_linkhub.getTime,19),"T" , " " ))
 			refresh = CDate(Replace(left(m_Token.expiration,19),"T" , " " )) < utcnow
 		End if
     End If
